@@ -68,8 +68,8 @@ void display() {
     glTranslatef(-centerX, -centerY, -centerZ);
 
     // --- Squares (GL_POLYGON) ---
-    for (size_t i = 0; i < gSquare.size(); ++i) {
-        const Square& sq = gSquare[i];
+    for (size_t i = 0; i < gSquares.size(); ++i) {
+        const Square& sq = gSquares[i];
         const bool hasUV = sq.hasUV;
 
         applyMaterial_Lit(sq.material, hasUV);

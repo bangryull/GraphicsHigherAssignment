@@ -1,4 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS
+ï»¿#define _CRT_SECURE_NO_WARNINGS
 #include <float.h>
 #include <algorithm>
 #include <fstream>
@@ -9,15 +9,13 @@
 #include <limits>
 #include "header.h"
 
-// ------------------------------------------------------------------
-/*  objÆÄÀÏ ºÒ·¯¿À±â
-objÆÄÀÏ ºÒ·¯¿À±â ÄÚµå´Â Áö¼ÓµÈ AI GPT-5 ¸ğµ¨ »ç¿ëÀ¸·Î ±âÁ¸ ÄÚµåÀÇ ¿øÇüÀÌ ³²Áö ¾Ê¾Ò½À´Ï´Ù..
+/* ------------------------------------------------------------------
+objíŒŒì¼ì„ ë¶ˆëŸ¬ì˜¤ê¸° ìœ„í•œ ì´ ì½”ë“œëŠ” ì§€ì†ëœ AI GPT-5 ëª¨ë¸ ì‚¬ìš©ìœ¼ë¡œ ê¸°ì¡´ ì½”ë“œì˜ ì›í˜•ì´ ë‚¨ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤..
 https://github.com/bangryull/CGAssignment8-1/blob/master/EmptyViewer/load_mesh.cpp
-À§´Â Àú¹ø ÇĞ±â ±×·¡ÇÈ½º °úÁ¦¿¡¼­ ¸¸µé¾ú´ø objÆÄÀÏ ·Î´õ ÄÚµåÀÔ´Ï´Ù.
-Àú ÄÚµå¸¦ GPT¿¡°Ô ÁÖ°í °íÄ¡´Â ¹æÇâÀ¸·Î ¼öÁ¤ÇßÁö¸¸ 0¹øºÎÅÍ Â÷·Ê´ë·Î Àû¿ëÇÏ¸ç ¼öÁ¤½ÃÅ°´Ùº¸´Ï
-¹ØÀÇ ÄÚµåÃ³·³ ¿øÇüÀÌ ³²Áö ¾Ê°ÔµÇ¾ú½À´Ï´Ù.
-*/
-// ------------------------------------------------------------------
+ìœ„ëŠ” ì €ë²ˆ í•™ê¸° ê·¸ë˜í”½ìŠ¤ ê³¼ì œì—ì„œ ë§Œë“¤ì—ˆë˜ objíŒŒì¼ ë¡œë” ì½”ë“œì…ë‹ˆë‹¤.
+ì € ì½”ë“œë¥¼ GPTì—ê²Œ ì£¼ê³  ê³ ì¹˜ëŠ” ë°©í–¥ìœ¼ë¡œ ìˆ˜ì •í–ˆì§€ë§Œ 0ë²ˆë¶€í„° ì°¨ë¡€ëŒ€ë¡œ ì ìš©í•˜ë©° ìˆ˜ì •ì‹œí‚¤ë‹¤ë³´ë‹ˆ
+ë°‘ì˜ ì½”ë“œì²˜ëŸ¼ ì›í˜•ì´ ë‚¨ì§€ ì•Šê²Œë˜ì—ˆìŠµë‹ˆë‹¤.
+------------------------------------------------------------------ */
 
 static std::string dirOf(const std::string& path) {
     size_t p = path.find_last_of("/\\");
@@ -53,12 +51,12 @@ static FaceVert parseFaceToken(const std::string& s)
     return out;
 }
 
-// OBJ 1-based/À½¼ö ÀÎµ¦½º¸¦ 0-based·Î º¯È¯
+// OBJ 1-based/ìŒìˆ˜ ì¸ë±ìŠ¤ë¥¼ 0-basedë¡œ ë³€í™˜
 static int toZeroBased(int idxOBJ, int count)
 {
     if (idxOBJ > 0) return idxOBJ - 1;     // 1..N  -> 0..N-1
     if (idxOBJ < 0) return count + idxOBJ; // -1    -> count-1
-    return -1;                             // 0Àº ºñÁ¤»ó
+    return -1;                             // 0ì€ ë¹„ì •ìƒ
 }
 
 int findMaterialIndex(const std::string& name) {
@@ -66,7 +64,7 @@ int findMaterialIndex(const std::string& name) {
         if (gMaterials[i].name == name) return (int)i;
     return -1;
 }
-// ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 
 static Vector3 faceNormal3(const Vector3& a, const Vector3& b, const Vector3& c) {
@@ -88,7 +86,7 @@ void load_mesh(const std::string& fileName)
     gTextures.clear();
     gPositions.clear();
     gTriangles.clear();
-    gSquare.clear();
+    gSquares.clear();
     gTriNormals.clear();
     gQuadNormals.clear();
 
@@ -154,12 +152,12 @@ void load_mesh(const std::string& fileName)
                     tind.push_back((unsigned)ti);
                 }
                 else {
-                    tind.push_back(0); // vt ¹ÌÁöÁ¤
+                    tind.push_back(0); // vt ë¯¸ì§€ì •
                 }
             }
             if (vind.empty()) continue;
 
-            // === Æú¸®°ï ºĞ±â ===
+            // === í´ë¦¬ê³¤ ë¶„ê¸° ===
             if (vind.size() == 3) {
                 Triangle tri{};
                 tri.indices[0] = vind[0]; tri.indices[1] = vind[1]; tri.indices[2] = vind[2];
@@ -167,24 +165,24 @@ void load_mesh(const std::string& fileName)
                 tri.material = currentMat;
                 tri.hasUV = (tind[0] < gTextures.size() && tind[1] < gTextures.size() && tind[2] < gTextures.size());
                 gTriangles.push_back(tri);
-                // ¸é¹ı¼± Ä³½Ã
+                // ë©´ë²•ì„  ìºì‹œ
                 const Vector3 n = faceNormal3(gPositions[tri.indices[0]], gPositions[tri.indices[1]], gPositions[tri.indices[2]]);
                 gTriNormals.push_back(n);
             }
             else if (vind.size() == 4) {
-                // ¡Ú »ç°¢ÇüÀº 'Æú¸®°ï(4Á¡)' ÀüÁ¦ À¯Áö
+                // ì‚¬ê°í˜•ì€ 'í´ë¦¬ê³¤(4ì )' ì „ì œ ìœ ì§€
                 Square sq{};
                 for (int i = 0; i < 4; ++i) { sq.indices[i] = vind[i]; sq.textures[i] = tind[i]; }
                 sq.material = currentMat;
                 sq.hasUV = (tind[0] < gTextures.size() && tind[1] < gTextures.size() &&
                     tind[2] < gTextures.size() && tind[3] < gTextures.size());
-                gSquare.push_back(sq);
-                // ¸é¹ı¼± Ä³½Ã(Ã¹ 3Á¡À¸·Î)
+                gSquares.push_back(sq);
+                // ë©´ë²•ì„  ìºì‹œ(ì²« 3ì ìœ¼ë¡œ)
                 const Vector3 n = faceNormal3(gPositions[sq.indices[0]], gPositions[sq.indices[1]], gPositions[sq.indices[2]]);
                 gQuadNormals.push_back(n);
             }
             else if (vind.size() > 4) {
-                // 5°¢ ÀÌ»óÀº »ï°¢ ÆÒÀ¸·Î À¯Áö(·»´õ ÆíÀÇ»ó). ÇÊ¿äÇÏ¸é PolygonÀ¸·Îµµ È®Àå °¡´É.
+                // 5ê° ì´ìƒì€ ì‚¼ê° íŒ¬ìœ¼ë¡œ ìœ ì§€(ë Œë” í¸ì˜ìƒ). í•„ìš”í•˜ë©´ Polygonìœ¼ë¡œë„ í™•ì¥ ê°€ëŠ¥.
                 for (size_t i = 1; i + 1 < vind.size(); ++i) {
                     Triangle tri{ {vind[0], vind[i], vind[i + 1]},
                                   {tind[0], tind[i], tind[i + 1]},

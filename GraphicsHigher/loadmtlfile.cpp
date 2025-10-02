@@ -1,5 +1,10 @@
-#define STB_IMAGE_IMPLEMENTATION
+﻿#define STB_IMAGE_IMPLEMENTATION
 #include <stb/stb_image.h>
+/*----------------------------
+png 파일을 불러오기 위한 라이브러리로 stb 라이브러리를 선택해서 불러왔습니다.
+파일위치는 GL,glm과 같이 include 파일안에 존재합니다.
+라이브러리를 찾는 과정에서 GPT-5의 도움으로 stb의 존재를 확인했습니다.
+----------------------------*/
 
 #include "header.h"
 
@@ -50,11 +55,10 @@ static GLuint createGLTextureFromImage(const unsigned char* data, int w, int h, 
 
     glTexImage2D(GL_TEXTURE_2D, 0, internalFmt, w, h, 0, srcFmt, GL_UNSIGNED_BYTE, data);
 
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);   // �ʿ� �� mipmap �ѱ�
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR); 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    // glGenerateMipmap(GL_TEXTURE_2D);
 
     glBindTexture(GL_TEXTURE_2D, 0);
     return id;
@@ -74,7 +78,7 @@ void load_mtl(const std::string& filePath) {
     const std::string mtlBaseDir = dirOf(filePath);
 
     std::string line;
-    Material current;            // �� header.h�� Material ���
+    Material current;
     bool hasCurrent = false;
 
     stbi_set_flip_vertically_on_load(true);
@@ -86,7 +90,7 @@ void load_mtl(const std::string& filePath) {
         std::string tag; iss >> tag;
 
         if (tag == "newmtl") {
-            if (hasCurrent) gMaterials.push_back(current);   // �� header.h�� gMaterials ���
+            if (hasCurrent) gMaterials.push_back(current);
             current = Material();
             iss >> current.name;
             hasCurrent = true;

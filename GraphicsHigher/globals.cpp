@@ -1,20 +1,20 @@
-#include "header.h"
+ï»¿#include "header.h"
 
 /*---------------------------
-GPT-5 ¸ğµ¨¿¡°Ô ¿Ï¼ºµÈ ÄÚµå¸¦ ÁÖ¾îÁÖ°í ±ò²ûÇÏ°Ô Á¤¸®ÇÏ°Ô ÇÏ¿´½À´Ï´Ù.
-Çì´õ¿Í º°°³·Î globals.cpp¸¦ ¸¸µé¾î ¸ğµç °ªµéÀ» µû·Î ÀúÀåÇÏ¿© 
-exturnÀ¸·Î °¡Á®¿À´Â ¹æ¹ıÀ» ÃßÃµÇÏ¿´°í ±× ¹æ½Ä´ë·Î ±¸Çö Çß½À´Ï´Ù.
+GPT-5 ëª¨ë¸ì—ê²Œ ì™„ì„±ëœ ì½”ë“œë¥¼ ì£¼ì–´ì£¼ê³  ê¹”ë”í•˜ê²Œ ì •ë¦¬ëŠ” ë°©ë²•ì„ ë¬¼ì–´ë³´ì•˜ìŠµë‹ˆë‹¤.
+í—¤ë”ì™€ ë³„ê°œë¡œ globals.cppë¥¼ ë§Œë“¤ì–´ ëª¨ë“  ê°’ë“¤ì„ ë”°ë¡œ ì €ì¥í•˜ì—¬ 
+exturnìœ¼ë¡œ ê°€ì ¸ì˜¤ëŠ” ë°©ë²•ì„ ì¶”ì²œí•˜ì˜€ê³  ê·¸ ë°©ì‹ëŒ€ë¡œ êµ¬í˜„ í–ˆìŠµë‹ˆë‹¤.
 ---------------------------*/
 
-std::vector<Material> gMaterials;
-std::string gOBJBaseDir;
+std::vector<Material> gMaterials; //ë©”í„°ë¦¬ì–¼ í…Œì´ë¸”
+std::string gOBJBaseDir; //í…ìŠ¤ì²˜ ê¸°ë³¸ ê²½ë¡œ
 
-std::vector<Vector2>  gTextures;
-std::vector<Vector3>  gPositions;
-std::vector<Triangle> gTriangles;
-std::vector<Square>   gSquare;
+std::vector<Vector2>  gTextures; //vt(u,v) ì¢Œí‘œ
+std::vector<Vector3>  gPositions; //v(x,y,z) ì¢Œí‘œ
+std::vector<Triangle> gTriangles; //ì‚¼ê°í˜•ì €ì¥, 3ê°œì˜ vertex
+std::vector<Square>   gSquares; //ì‚¬ê°í˜• ì €ì¥, 4ê°œì˜ vertex
 
-std::vector<Vector3>  gTriNormals;
-std::vector<Vector3>  gQuadNormals;
+std::vector<Vector3>  gTriNormals; //gTriangles[i]ì˜ ë©´ ë²•ì„ 
+std::vector<Vector3>  gQuadNormals; //gSquares[i]ì˜ ë©´ ë²•ì„ 
 
 float centerX = 0, centerY = 0, centerZ = 0, radius = 1;

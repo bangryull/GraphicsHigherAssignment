@@ -1,4 +1,4 @@
-#include "header.h"
+﻿#include "header.h"
 #include <algorithm>
 
 static float clampf(float v, float lo, float hi) { return (v < lo ? lo : (v > hi ? hi : v)); }

@@ -1,10 +1,18 @@
 ﻿#include "header.h"
 #include <algorithm>
 
+/*
+GPT-5를 통해 display.cpp에서 material 적용부분을 다른 cpp파일로 만들라는 피드백을 받았고
+이를 통해 생긴 파일입니다.
+*/
+
+//범위를 고정하는 함수, GPT-5가 구현했습니다.
 static float clampf(float v, float lo, float hi) { return (v < lo ? lo : (v > hi ? hi : v)); }
 
+//재질, 블렌딩, 텍스쳐 세팅
 void applyMaterial_Lit(int matIndex, bool useTexture)
 {
+    //재질을 못 찾았을 때 세팅 자동화, GPT-5를 통해 자동 생성되었습니다.
     if (matIndex < 0 || matIndex >= (int)gMaterials.size()) {
         const GLfloat Ka[4] = { 0.2f,0.2f,0.2f,1 };
         const GLfloat Kd[4] = { 0.8f,0.8f,0.8f,1 };
@@ -18,6 +26,7 @@ void applyMaterial_Lit(int matIndex, bool useTexture)
         return;
     }
 
+    //mtl파일에서 Ns 범위가 GL보다 범위가 크다고 GPT-5에게 피드백 받은 후 적용했습니다.
     const Material& m = gMaterials[matIndex];
     float shin = clampf(m.Ns * (128.0f / 1000.0f), 0.0f, 128.0f);
 
